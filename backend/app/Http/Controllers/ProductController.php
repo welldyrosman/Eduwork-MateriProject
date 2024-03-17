@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     public function getProducts(){
-        $products=Product::orderby('id','DESC')->get();
+        $products=Product::with('producttags')->orderby('id','DESC')->get();
         return response()->json($products);
     }
     public function getProduct($barcode){
-        $product=Product::where('id',$barcode)->first();
+        $product=Product::with('producttags')->where('id',$barcode)->first();
         if(!$product){
             throw new Exception("Barang TIdak Ditemukan");
         }

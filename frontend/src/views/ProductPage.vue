@@ -14,7 +14,9 @@
             <input type="number" v-model="qty" class="border rounded w-100 p-1" />
 
             <h1>Rp.{{ total.toLocaleString() }}</h1>
-
+            <div class="flex  gap-2 flex-wrap">
+            <div class="flex justify-between text-md bg-gray-200 rounded-md w-min px-2 py-1" v-for="(tagi, index) in formdata.producttags" :key="index">{{tagi.tag.tag}} <div class="cursor-pointer" @click="removetag(tagi.id)">X</div></div>
+        </div>
             <span  v-if="errors.harga"  class="text-red-700">{{laodErrorMsg(errors.harga)}}</span>
             <div class="flex my-2 justify-end">
                 <button @click="submitForm" class="bg-blue-400 text-white px-5 py-2 rounded">Simpan</button>
@@ -67,6 +69,14 @@ export default {
        this.loadData();
     },
     methods: {
+        removetag(producttag_id){
+            axios.delete('http://localhost:8000/api/deletebyproducttag/'+producttag_id).then(ret => {
+               this.scanBarcode();
+               Swal.fire("OK!", "Tag Telah DI Hapus", "success");
+            }).catch(err => {
+                Swal.fire("Error!", "Barang deang abrcode tsb tidak ada", "errors");
+            });
+        },
         scanBarcode(){
             axios.get('http://localhost:8000/api/products/'+this.barcode).then(ret => {
                 this.formdata=ret.data

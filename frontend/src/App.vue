@@ -1,7 +1,6 @@
 
 
 <template>
-  <MyNavbar />
   <RouterView />
 </template>
 <script>

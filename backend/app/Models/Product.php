@@ -14,4 +14,7 @@ class Product extends Model
     //     'email',
     //     'password',
     // ];
+    public function producttags(){
+        return $this->hasMany(ProductTag::class)->with('tag');
+    }
 }
