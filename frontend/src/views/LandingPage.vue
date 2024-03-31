@@ -10,7 +10,7 @@
 </template>
 <script>
 import CardCatalog from '@/components/CardCatalog.vue';
-import axios from 'axios';
+import axios from '@/plugins/axios'
 import MyNavbar from '@/components/MyNavbar.vue';
 export default {
     components: {CardCatalog,MyNavbar },
@@ -32,13 +32,9 @@ export default {
     },
     created() {
         console.log("Hallo 1")
-
-        axios.get('http://localhost:8000/api/products').then(ret => {
-            console.log("Hallo Hallo")
-            // console.log("BERHASIL INI DATANYA",ret)
-            // console.log("Data product",this.dataproduct)
-            this.dataproduct = ret.data
-            //console.log("Data product after",this.dataproduct)
+        
+        axios.get('/products').then(ret => {
+            this.dataproduct = ret
         }).catch(err => {
             console.log("GAGAL CUY", err)
         });

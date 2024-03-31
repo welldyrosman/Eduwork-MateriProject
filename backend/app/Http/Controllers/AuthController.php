@@ -30,6 +30,9 @@ class AuthController extends APIController
         // }
         // $user=Auth::user();
         $token=$user->createToken('API Token')->accessToken;
-        return $token;
+        return $this->response(true,[
+            "user"=>$user,
+            "token"=>$token
+        ],"Login Berhasil");
     }
 }

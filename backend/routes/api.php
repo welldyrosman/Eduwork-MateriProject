@@ -25,7 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('products/{barcode}',[ProductController::class,'getProduct']);
 
 Route::middleware('auth:api')->group(function () {
+    Route::get('admin/products',[ProductController::class,'getProducts']);
+    
+});
 
+Route::post('login',[AuthController::class,'login']);
     Route::get('products',[ProductController::class,'getProducts']);
     Route::post('products',[ProductController::class,'saveProducts']);
 
@@ -37,7 +41,4 @@ Route::middleware('auth:api')->group(function () {
     Route::post('products/{product_id}',[ProductTagController::class,'removetag2']);
     Route::post('deleteproducts',[ProductTagController::class,'removetag3']);
     Route::delete('deletebyproducttag/{producttag_id}',[ProductTagController::class,'removetag4']);
-});
-
-Route::post('login',[AuthController::class,'login']);
 

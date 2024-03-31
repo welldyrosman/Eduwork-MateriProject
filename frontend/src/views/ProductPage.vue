@@ -49,7 +49,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from '@/plugins/axios'
 export default {
     data() {
         return {
@@ -74,7 +74,7 @@ export default {
     },
     methods: {
         removetag(producttag_id) {
-            axios.delete('http://localhost:8000/api/deletebyproducttag/' + producttag_id).then(ret => {
+            axios.delete('/deletebyproducttag/' + producttag_id).then(ret => {
                 this.scanBarcode();
                 Swal.fire("OK!", "Tag Telah DI Hapus", "success");
             }).catch(err => {
@@ -82,7 +82,7 @@ export default {
             });
         },
         scanBarcode() {
-            axios.get('http://localhost:8000/api/products/' + this.barcode).then(ret => {
+            axios.get('/admin/products/' + this.barcode).then(ret => {
                 this.formdata = ret.data
             }).catch(err => {
                 Swal.fire("Error!", "Barang deang abrcode tsb tidak ada", "errors");
@@ -96,18 +96,9 @@ export default {
             return msg
         },
         loadData() {
-            axios.request({
-                method: 'get',
-                maxBodyLength: Infinity,
-                url: 'http://localhost:8000/api/products',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGM4MDRhN2MxYTFjNDBkMWMzZmJiM2I4OGVkOGM0ZTAyOThkZDQzOWM2NDU4NjNlMDM5NzM0M2U4M2ZkOTAwZWQzNTgzN2ZiN2UwN2I2NTkiLCJpYXQiOjE3MTEyOTA5MTkuMzMwNzY3LCJuYmYiOjE3MTEyOTA5MTkuMzMwNzY5LCJleHAiOjE3NDI4MjY5MTkuMjc3NTc5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.nBP5rR6znjGPJXu9yBTJ_Cd4XwRMGpoTGhR5rBmLEHI0EuOxdTs_LZD5TGw76VGn_37FOTxxLbel1WE_ueQEwN4ZDfqk5oLNgDoWy2MLsrQWJRCBxkXWskXL5XRN8PNlBMAVLgM5BOssxdxFQQexuiTpaZURbwx3bFTqOFOu-9cWxfttmnILnFcNzezZJJqS7Uyn9EoJDqLpLjgc6ufMJvTuAc7XoZzZmLPBHaf-3vPgvkEc-3y8OHTSpiL8qVOgxOfxBSqZq2MMFjK7nWr7YzCG8zgvdZ4iNFJsNrcxv4gO7VF23-oYBygPeQ289axqGYkmc45NueNzeTBBD0CXyC7roLzMnxgoXqTeh4XvlrHpFEGPrde0jR1ch8zCU6gqeYYrSU0rAbT6dXz3ornr93k25hdOUVMwu4Shb5Misx_9FSiJKE5fDg0axoar6-t16Xr3N7Rhon4qvq1SzJKVWPZ2Mq-5CfDOVIl_XpaR35YAZdyqYJiVuJEZlHmjia5KT_JgbJ_T302h_CucP50RTIoU2jrhIfDPzU6L5Sxg8IRBDsXBr4IoRTJlP2mUo1FOGwb40-w4_ehvcL28nPtNl2g4X7tb7hociDpNt_CytbNFomu2pk8gVhRhbK72meuJgZYyRjNvmNnz1QXKmcX4RW2WKVARRXp3Fcpr5wDFIaQ'
-                }
-            }).then(ret => {
+            axios.get('/admin/products').then(ret => {
                 console.log("Hallo Hallo")
-                this.dataproduct = ret.data
-
+                this.dataproduct = ret
             }).catch(err => {
                 console.log("GAGAL CUY", err)
             });
