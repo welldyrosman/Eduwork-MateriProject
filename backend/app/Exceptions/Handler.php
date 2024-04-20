@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
             ],Response::HTTP_NOT_FOUND);
         });
         $this->renderable(function (AuthenticationException $e, $request) {
-            return response()->json([
+             return response()->json([
                 'status' => "error",
                 'data'    => null,
                 'message' =>$e->getMessage(),

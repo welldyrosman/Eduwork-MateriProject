@@ -43,6 +43,7 @@ export default{
                 console.log("LOGIN Berhasil",ret.data.user)
                 this.store.login(ret.data.user,ret.data.token);
                 Swal.fire("sukses!", ret.message, "success");
+                this.$router.push("/")
             }).catch(err=>{
                 console.log("Login GAGAL",err)
                 Swal.fire("Error!", err.message, "errors");

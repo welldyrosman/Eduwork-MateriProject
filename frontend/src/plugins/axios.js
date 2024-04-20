@@ -20,7 +20,9 @@ request.interceptors.response.use(response=>{
     console.log("error dari plugins",error);
     if(error.response.status==401){
         const store = useUserStore()
-        store.$reset();
+        store.logout();
+    //     localStorage.removeItem('user')
+    // localStorage.removeItem('token')
         router.push("/login"); 
     }else{
         return Promise.reject(error.response)

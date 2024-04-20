@@ -22,23 +22,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('products/{barcode}',[ProductController::class,'getProduct']);
+Route::get('products/{barcode}', [ProductController::class, 'getProduct']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('admin/products',[ProductController::class,'getProducts']);
-    
+    Route::get('admin/products', [ProductController::class, 'getProducts']);
+    Route::post('logout', [AuthController::class, 'logout']);
 });
 
-Route::post('login',[AuthController::class,'login']);
-    Route::get('products',[ProductController::class,'getProducts']);
-    Route::post('products',[ProductController::class,'saveProducts']);
+Route::post('login', [AuthController::class, 'login']);
+Route::get('products', [ProductController::class, 'getProducts']);
+Route::post('products', [ProductController::class, 'saveProducts']);
 
-    Route::post('addcart',[CartController::class,'addCart']);
-    Route::get('carts',[CartController::class,'getall']);
-    Route::post('checkout',[CartController::class,'checkout']);
-    
-    Route::delete('products/{product_id}/{tag_id}',[ProductTagController::class,'removetag']);
-    Route::post('products/{product_id}',[ProductTagController::class,'removetag2']);
-    Route::post('deleteproducts',[ProductTagController::class,'removetag3']);
-    Route::delete('deletebyproducttag/{producttag_id}',[ProductTagController::class,'removetag4']);
+Route::post('addcart', [CartController::class, 'addCart']);
+Route::get('carts', [CartController::class, 'getall']);
+Route::post('checkout', [CartController::class, 'checkout']);
 
+Route::delete('products/{product_id}/{tag_id}', [ProductTagController::class, 'removetag']);
+Route::post('products/{product_id}', [ProductTagController::class, 'removetag2']);
+Route::post('deleteproducts', [ProductTagController::class, 'removetag3']);
+Route::delete('deletebyproducttag/{producttag_id}', [ProductTagController::class, 'removetag4']);

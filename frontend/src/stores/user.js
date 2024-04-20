@@ -2,14 +2,14 @@
 
 // export const useUserStore = defineStore('user', {
 //   state: () => {
-//     return { 
+//     return {
 //         user: {},
-//         token:null 
+//         token:null
 //     }
 //   },
 //   actions: {
 //     login(data_user,token){
-        
+
 //         this.user=data_user
 //         this.token=token
 //         console.log("PINIA",this..user)
@@ -22,16 +22,28 @@ import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(null)
-  const token = ref("")
-  function login(user_data,data_token) {
-    console.log("USER Is",user_data)
-    user.value=user_data;
-    token.value=data_token;
+  const token = ref('')
+  function login(user_data, data_token) {
+    console.log('USER Is', user_data)
+    localStorage.setItem('user', JSON.stringify(user_data))
+    localStorage.setItem('token', data_token)
+    user.value = user_data
+    token.value = data_token
+  }
+  function setAuth() {
+    const userLs = JSON.parse(localStorage.getItem('user'))
+    const tokenLs = localStorage.getItem('token')
+    if (userLs && tokenLs) {
+      user.value = userLs
+      token.value = tokenLs
+    }
   }
   function logout() {
-    user.value=null;
-    token.value="";
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    user.value = null
+    token.value = ''
   }
 
-  return { user,token,login,logout }
+  return { user, token, login, logout, setAuth }
 })

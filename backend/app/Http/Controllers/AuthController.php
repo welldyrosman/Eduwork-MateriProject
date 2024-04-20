@@ -35,4 +35,9 @@ class AuthController extends APIController
             "token"=>$token
         ],"Login Berhasil");
     }
+    public function logout(){
+       // dd(Auth::user()->token());
+        $user = Auth::user()->token();
+        $user->revoke();
+    }
 }
