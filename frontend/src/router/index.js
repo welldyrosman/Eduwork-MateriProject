@@ -5,6 +5,7 @@ import LoginPage from '@/views/LoginPage.vue'
 import FormPage from '@/views/FormPage.vue'
 import UserLayout from '@/components/layouts/UserLayout.vue'
 import AdminLayout from '@/components/layouts/AdminLayout.vue'
+import AboutPage from '@/views/AboutPage.vue'
 import { useUserStore } from '@/stores/user'
 
 const router = createRouter({
@@ -48,6 +49,11 @@ const router = createRouter({
       name: 'form',
       component: FormPage,
       meta: { canntoAccessAfterLogin: true }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutPage,
     }
   ]
 })
